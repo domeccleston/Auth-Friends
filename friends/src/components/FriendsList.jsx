@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from './LoginForm';
+import FriendForm from './FriendForm';
 
 const FriendsList = () => {
 
@@ -18,6 +19,7 @@ const FriendsList = () => {
         <div className="friends-list">
             {friendsData.map(friend => <h3>{friend.name}</h3>)}
         </div>
+        <FriendForm />
         </>
     );
 }
