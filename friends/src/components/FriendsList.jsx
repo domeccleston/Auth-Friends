@@ -11,8 +11,6 @@ const FriendsList = () => {
         .then(res => updateFriendsData(res.data))
     }, [friendsData])
 
-    console.log(friendsData);
-
     return (
         <>
         <h1>Friends:</h1>

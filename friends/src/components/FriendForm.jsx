@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { axiosWithAuth } from "./LoginForm";
 import uuid from 'uuid';
 
 const FriendForm = () => {
 
-  const [newFriend, setNewFriend] = useState({ id: uuid(), name: "", age: "", email: "" })
+  // set to initial number of friends and increment
+  let testRef = useRef(7)
+  const [newFriend, setNewFriend] = useState({ id: "", name: "", age: "", email: "" })
 
   const sendFriendData = event => {
       event.preventDefault();
+      newFriend.id = useRef.current;
       axiosWithAuth().post("http://localhost:5000/api/friends", newFriend)
         .then(res => {
             console.log(res)

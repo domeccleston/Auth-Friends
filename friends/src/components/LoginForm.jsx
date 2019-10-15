@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { withFormik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -14,12 +14,12 @@ export const axiosWithAuth = () => {
 };
 
 const LoginForm = () => {
-
+  const usernameRef = useRef();
   const history = useHistory();
   return (
     <div className="form-container">
       <Form className="login-form">
-        <Field type="text" name="username" placeholder="Username" />
+        <Field ref={usernameRef} type="text" name="username" placeholder="Username" />
         <Field type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>
       </Form>
@@ -36,7 +36,6 @@ const FormikLoginForm = withFormik({
   },
 
   handleSubmit(values, history) {
-    console.log(values);
     axiosWithAuth()
       .post("http://localhost:5000/api/login", values)
       .then(res => {
