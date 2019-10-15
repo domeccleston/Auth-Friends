@@ -1,20 +1,21 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export const axiosWithAuth = () => {
-    const token = localStorage.getItem('token');
-    return axios.create({
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${token}`
-        }
-    })
-}
+  const token = localStorage.getItem("token");
+  return axios.create({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${token}`
+    }
+  });
+};
 
 const LoginForm = () => {
- const history = useHistory();
+
+  const history = useHistory();
   return (
     <div className="form-container">
       <Form className="login-form">
@@ -35,12 +36,14 @@ const FormikLoginForm = withFormik({
   },
 
   handleSubmit(values, history) {
-    console.log(values)
-    axiosWithAuth().post('http://localhost:5000/api/login', values)
-    .then(res => {
-        localStorage.setItem('token', res.data.token);
-        history.props.history.push('/friendslist');
-    })
+    console.log(values);
+    axiosWithAuth()
+      .post("http://localhost:5000/api/login", values)
+      .then(res => {
+        console.log(res.data)
+        localStorage.setItem("token", res.data.payload);
+        history.props.history.push("/friendslist");
+      });
   }
 })(LoginForm);
 

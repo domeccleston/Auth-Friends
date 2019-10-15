@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from './LoginForm';
 
-
-
 const FriendsList = () => {
-    console.log(axiosWithAuth)
-    axiosWithAuth().get("http://localhost:5000/api/friends")
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err)
-        })
+
+    const [friendsData, updateFriendsData] = useState([]);
+
+    useEffect(() => {
+        axiosWithAuth().get('http://localhost:5000/api/friends')
+        .then(res => updateFriendsData(res.data))
+    }, [])
+
+    console.log(friendsData);
+
     return (
-        <div>List of friends will go here</div>
+        <>
+        <h1>Friends:</h1>
+        <div className="friends-list">
+            {friendsData.map(friend => <h3>{friend.name}</h3>)}
+        </div>
+        </>
     );
 }
  
