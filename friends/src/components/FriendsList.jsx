@@ -9,7 +9,7 @@ const FriendsList = () => {
     useEffect(() => {
         axiosWithAuth().get('http://localhost:5000/api/friends')
         .then(res => updateFriendsData(res.data))
-    }, [])
+    }, [friendsData])
 
     console.log(friendsData);
 

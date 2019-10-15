@@ -6,7 +6,7 @@ const FriendForm = () => {
 
   const [newFriend, setNewFriend] = useState({ id: uuid(), name: "", age: "", email: "" })
 
-  const login = event => {
+  const sendFriendData = event => {
       event.preventDefault();
       axiosWithAuth().post("http://localhost:5000/api/friends", newFriend)
         .then(res => {
@@ -15,6 +15,7 @@ const FriendForm = () => {
         .catch(err => {
             console.log(err)
         })
+      setNewFriend({ ...newFriend, name: "", age: "", email: "" })
   }
 
   const handleChange = event => {
@@ -27,10 +28,10 @@ const FriendForm = () => {
   return (
     <div className="friend-form">
       <h1>Add New Friend</h1>
-      <form onSubmit={login}>
-        <input onChange={handleChange} name="name" type="text" placeholder="Name" />
-        <input onChange={handleChange} name="age" type="number" placeholder="Age" />
-        <input onChange={handleChange} name="email" type="text" placeholder="Email" />
+      <form onSubmit={sendFriendData}>
+        <input value={newFriend.name} onChange={handleChange} name="name" type="text" placeholder="Name" />
+        <input value={newFriend.age} onChange={handleChange} name="age" type="number" placeholder="Age" />
+        <input value={newFriend.email} onChange={handleChange} name="email" type="text" placeholder="Email" />
         <button type="submit">Submit</button>
       </form>
     </div>
