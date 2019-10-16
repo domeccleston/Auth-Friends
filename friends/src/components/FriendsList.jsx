@@ -5,6 +5,13 @@ import FriendForm from "./FriendForm";
 
 const SetFriendsForm = props => {
 
+  const [friendToEdit, setFriendToEdit] = useState({
+    id: "",
+    name: "",
+    age: "",
+    email: ""
+  });
+
   const handleSelect = event => {
     console.log(JSON.parse(event.target.value));
   };

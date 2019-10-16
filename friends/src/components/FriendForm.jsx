@@ -3,8 +3,6 @@ import { axiosWithAuth } from "./LoginForm";
 
 const FriendForm = ({ newFriend, setNewFriend, handleChange }) => {
 
-  const newFriend, setNewFriend = useState()
-
   // set to initial number of friends and increment
   let testRef = useRef(7)
 
